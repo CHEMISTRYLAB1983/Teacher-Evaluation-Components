@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Evaluation Components</title>
+    
+    <!-- Bootstrap & Font Awesome -->
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+          
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/YOUR_FA_KIT.js" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+
+
+
+
+
+<!------------------------------------------ CSS START -------------------------------------------->
+
+
+
+<style>
+        /* Background Styling */
+        body {
+            background: linear-gradient(135deg, #09203F, #537895);
+            color: #FFFFFF;
+            font-family: 'Poppins', sans-serif;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Card Styling */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #c6d6df;
+            color: #FFFFFF;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Title Styling */
+        .text-primary {
+            color: #A8D5FF !important;
+            font-weight: bold;
+            text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Form Controls */
+        .form-control, .form-select {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid #B0BEC5;
+            color: #FFFFFF;
+            transition: all 0.3s ease;
+        }
+ .form-control:focus, .form-select:focus {
+        background: rgba(255, 255, 255, 0.3);
+        border-color: #A8D5FF;
+        color: white;
+        box-shadow: 0 0 10px #A8D5FF;
+    }
+        /* Optional: Style for input fields when focused */
+.table input:focus {
+    outline: none; /* Removes default outline */
+    border-color: #7A42F4; /* Changes border color when focused */
+    box-shadow: 0 0 5px rgba(122, 66, 244, 0.5); /* Adds a slight glow effect */
+}
+
+.option-box {
+            border: 2px solid #B0BEC5;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+        }
+        .form-check-label {
+            margin-left: 10px;
+            flex-grow: 1;
+        }
+
+        
+.form-select option {
+    color: white !important; 
+    background: #09203F !important; 
+
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #A8D5FF;
+            color: white;
+            box-shadow: 0 0 10px #A8D5FF;
+        }
+
+        /* Table Styling */
+        .table {
+            border: 1px solid #B0BEC5;
+            color: #C2E0F5;
+        }
+
+        .table-dark {
+            background: #7A42F4;
+            color: black;
+        }
+
+        .table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+       /* Style for input fields inside the table */
+.table input {
+    color: black !important; /* Ensures text remains black while typing */
+    background-color: white; /* Sets a white background for better contrast */
+    border: 1px solid #B0BEC5; /* Adds a border to match table styling */
+    padding: 5px; /* Adds some padding for better visibility */
+}
+
+
+
+        /* Custom Button */
+        .btn-primary {
+            background: linear-gradient(135deg, #7A42F4, #A8D5FF);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            transition: 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 25px;
+        }
+
+        .btn-primary:hover {
+            background: #A8D5FF;
+            color: #09203F !important;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+         /* Print Styles */
+         @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .card {
+                background: white !important;
+                color: black !important;
+                box-shadow: none;
+                border: 1px solid #000;
+                padding: 20px;
+            }
+            .btn-primary, .btn-print {
+                display: none !important;
+            }
+        }
+        @media print {
+    body {
+        background: linear-gradient(135deg, #09203F, #537895) !important; /* Maintain background */
+        color: white !important;
+    }
+
+    .card {
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: white !important;
+        box-shadow: none !important;
+        border: 1px solid #c6d6df !important;
+        padding: 20px !important;
+    }
+
+    .table {
+        border: 1px solid #B0BEC5 !important;
+        color: #C2E0F5 !important;
+    }
+
+    .table-dark {
+        background: #7A42F4 !important;
+        color: black !important;
+    }
+
+    /* Ensure buttons are hidden when printing */
+    .btn-primary, .btn-print {
+        display: none !important;
+    }
+
+    /* Force browsers to print background colors */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+@media (max-width: 768px) {
+        .card {
+            padding: 15px;
+        }
+        .form-control, .form-select {
+            font-size: 14px;
+        }
+        .btn-primary {
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .card {
+            padding: 10px;
+        }
+        .text-primary {
+            font-size: 20px;
+        }
+        .form-control, .form-select {
+            font-size: 12px;
+            padding: 8px;
+        }
+        .btn-primary {
+            font-size: 12px;
+            padding: 6px 12px;
+        }
+    }
+
+    </style>
+</head>
+
+<body>
+    <body class="container mt-4">
+        <div class="card shadow-lg p-4">
+            <h2 class="text-center text-primary">
+                <i class="fa-solid fa-user-graduate"></i> Teacher Evaluation Components</h2>
+            <form id="studentForm" method="post">
+        <div class="mb-3">
+            <label class="form-label"><i class="fa-solid fa-user"></i> Student Name</label>
+            <input type="text" id="Name" name="Name" class="form-control" placeholder="Enter Student Name" required>
+        </div>
+    
+        <div class="mb-3">
+            <label class="form-label"><i class="fa-solid fa-envelope"></i> Email</label>
+            <input type="email" id="Email" name="Email" class="form-control" placeholder="Enter Email" required>
+        </div>
+    
+        <div class="mb-3">
+            <label class="form-label"><i class="fa-solid fa-id-badge"></i> Roll No</label>
+            <input type="number" id="RollNo" name="RollNo" class="form-control" placeholder="Enter Roll No" required>
+        </div>
+    
+        <div class="mb-3">
+            <label class="form-label"><i class="fa-solid fa-school"></i> Class</label>
+            <select class="form-select" id="Class" name="Class" required>
+                <option selected disabled>Select Class</option>
+                <option value="1R">1R</option>
+                <option value="1S">1S</option>
+                <option value="1N">1N</option>
+                <option value="1U1">1U1</option>
+                <option value="1U2">1U2</option>
+                <option value="1M">1M</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><i class="fa-solid fa-book"></i> Course Outcomes</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="outcome1" name="CourseOutcomes" value="Apply the various techniques of water softening along with applications and its quality parameters for the use of water in industry">
+                <label class="form-check-label" for="outcome1">Apply the various techniques of water softening...</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="outcome2" name="CourseOutcomes" value="Explain the various types of corrosion, its control methods, and battery technology">
+                <label class="form-check-label" for="outcome2">Explain the various types of corrosion...</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="outcome3" name="CourseOutcomes" value="Identify the various materials such as Cement, lubricant, Ceramics, Refractory, and Nanomaterial used for future technology with their application in day-to-day life">
+                <label class="form-check-label" for="outcome3">Identify the various materials...</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="outcome4" name="CourseOutcomes" value="Identify the fuel for IC engines, its combustion, and flue gas analysis">
+                <label class="form-check-label" for="outcome4">Identify the fuel for IC engines...</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="outcome5" name="CourseOutcomes" value="Utilize the knowledge about polymer and engineering materials towards different applications">
+                <label class="form-check-label" for="outcome5">Utilize the knowledge about polymer...</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="outcome6" name="CourseOutcomes" value="Provide the knowledge about Metallurgy and analytical techniques">
+                <label class="form-check-label" for="outcome6">Provide the knowledge about Metallurgy...</label>
+            </div>
+        </div>
+
+
+        <!--Location-->
+        <h5><i class="fa-solid fa-location-dot"></i> Location</h5>
+        <table class="table table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Sample</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sample 1</td>
+                    <td><input type="text" class="form-control"id="LocationSample1"></td>
+                </tr>
+                <tr>
+                    <td>Sample 2</td>
+                    <td><input type="text" class="form-control"id="LocationSample2"></td>
+                </tr>
+                <tr>
+                    <td>Sample 3</td>
+                    <td><input type="text" class="form-control"id="LocationSample3"></td>
+                </tr>
+            </tbody>
+        </table>      
+        
+                 <!-------------------Image--------------------->
+
+                 <!--<div class="mb-3">
+                    <label class="form-label">Submit Image While Performing pratical</label>
+                    <input type="file" class="form-control" accept="image/*" onchange="enablePreview(event)" id="fileInput">
+                    
+                    <button id="previewButton" type="button" style="display: none; margin-top: 10px;" class="btn btn-primary" onclick="previewImage()">Preview</button>
+                    
+                    <img id="imagePreview" style="max-width: 346px; display: none; margin-top: 10px;">
+                </div>
+                
+                <script>
+                    let selectedFile = null;
+                
+                    function enablePreview(event) {
+                        selectedFile = event.target.files[0];
+                        const previewButton = document.getElementById("previewButton");
+                
+                        if (selectedFile) {
+                            previewButton.style.display = 'inline-block';
+                        }
+                    }
+                
+                    function previewImage() {
+                        if (selectedFile) {
+                            const imagePreview = document.getElementById("imagePreview");
+                
+                            imagePreview.src = URL.createObjectURL(selectedFile);
+                            imagePreview.style.display = 'block';
+                        }
+                    }
+                </script>  -->
+                 
+         <!-------------------Date------------------->
+         <div class="mb-3">
+            <label class="form-label">
+                <i class="fa-solid fa-calendar"></i> Date
+            </label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fa-solid fa-calendar" id="Date"></i>
+                </span>
+                <input type="date" class="form-control" id="dateInput">
+            </div>
+        </div>    
+        
+        <!-- Water Analysis Table -->
+
+        <h6><i class="fa-solid fa-flask"></i> Water Analysis (Observation)</h6>
+<table class="table table-bordered text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>Sample</th>
+            <th>Temporary Hardness</th>
+            <th>Permanent Hardness</th>
+            <th>Total Hardness</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Sample 1</td>
+            <td><input type="text" class="form-control" id="TemporaryHardness1" name="TemporaryHardness1"></td>
+            <td><input type="text" class="form-control" id="PermanentHardness1" name="PermanentHardness1"></td>
+            <td><input type="text" class="form-control" id="TotalHardness1" name="TotalHardness1"></td>
+        </tr>
+        <tr>
+            <td>Sample 2</td>
+            <td><input type="text" class="form-control" id="TemporaryHardness2" name="TemporaryHardness2"></td>
+            <td><input type="text" class="form-control" id="PermanentHardness2" name="PermanentHardness2"></td>
+            <td><input type="text" class="form-control" id="TotalHardness2" name="TotalHardness2"></td>
+        </tr>
+        <tr>
+            <td>Sample 3</td>
+            <td><input type="text" class="form-control" id="TemporaryHardness3" name="TemporaryHardness3"></td>
+            <td><input type="text" class="form-control" id="PermanentHardness3" name="PermanentHardness3"></td>
+            <td><input type="text" class="form-control" id="TotalHardness3" name="TotalHardness3"></td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Alkalinity Analysis -->
+<h6><i class="fa-solid fa-tint"></i> Alkalinity Analysis</h6>
+<table class="table table-bordered text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>Sample</th>
+            <th> Alkalinity Due to Hydroxide </th>
+            <th> Alkalinity Due to Carbonates </th>
+            <th> Alkalinity Due to Bicarbonates </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Sample 1</td>
+            <td><input type="text" class="form-control" id="Hydroxide1" name="Hydroxide1"></td>
+            <td><input type="text" class="form-control" id="Carbonates1" name="Carbonates1"></td>
+            <td><input type="text" class="form-control" id="Bicarbonates1" name="Bicarbonates1"></td>
+        </tr>
+        <tr>
+            <td>Sample 2</td>
+            <td><input type="text" class="form-control" id="Hydroxide2" name="Hydroxide2"></td>
+            <td><input type="text" class="form-control" id="Carbonates2" name="Carbonates2"></td>
+            <td><input type="text" class="form-control" id="Bicarbonates2" name="Bicarbonates2"></td>
+        </tr>
+        <tr>
+            <td>Sample 3</td>
+            <td><input type="text" class="form-control" id="Hydroxide3" name="Hydroxide3"></td>
+            <td><input type="text" class="form-control" id="Carbonates3" name="Carbonates3"></td>
+            <td><input type="text" class="form-control" id="Bicarbonates3" name="Bicarbonates3"></td>
+        </tr>
+    </tbody>
+</table>
+
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit</button>
+        </div>
+        <br>
+    </form>
+
+    <!-- Print Button -->
+    <div class = "text-center">
+        <button type="button" class="btn btn-primary btn-print" onclick="window.print();">
+            <i class="fa-solid fa-print"></i> Print
+        </button>
+</div>
+    
+    <!------------------------------------------java script ---------------------------------------------------------->
+   <script>
+
+document.getElementById("studentForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    var formData = new FormData(this);
+
+    // Capture Date
+    var dateValue = document.getElementById("dateInput").value;
+    formData.append("Date", dateValue);
+
+    // Capture Course Outcomes (Checkboxes)
+    var outcomes = [];
+    document.querySelectorAll(".form-check-input:checked").forEach(input => {
+        outcomes.push(input.value);
+    });
+    formData.append("CourseOutcomes", outcomes.join(", "));
+
+    // Capture Location Data
+    formData.append("LocationSample1", document.getElementById("LocationSample1").value);
+    formData.append("LocationSample2", document.getElementById("LocationSample2").value);
+    formData.append("LocationSample3", document.getElementById("LocationSample3").value);
+
+
+    // Capture Water Analysis Data
+    formData.append("TemporaryHardness1", document.getElementById("TemporaryHardness1").value);
+    formData.append("PermanentHardness1", document.getElementById("PermanentHardness1").value);
+    formData.append("TotalHardness1", document.getElementById("TotalHardness1").value);
+
+    formData.append("TemporaryHardness2", document.getElementById("TemporaryHardness2").value);
+    formData.append("PermanentHardness2", document.getElementById("PermanentHardness2").value);
+    formData.append("TotalHardness2", document.getElementById("TotalHardness2").value);
+
+    formData.append("TemporaryHardness3", document.getElementById("TemporaryHardness3").value);
+    formData.append("PermanentHardness3", document.getElementById("PermanentHardness3").value);
+    formData.append("TotalHardness3", document.getElementById("TotalHardness3").value);
+    // Capture Date
+    console.log("Sending Date:", dateValue);
+
+    // Capture Alkalinity Analysis Data
+    formData.append("Hydroxide1", document.getElementById("Hydroxide1").value);
+    formData.append("Carbonates1", document.getElementById("Carbonates1").value);
+    formData.append("Bicarbonates1", document.getElementById("Bicarbonates1").value);
+
+    formData.append("Hydroxide2", document.getElementById("Hydroxide2").value);
+    formData.append("Carbonates2", document.getElementById("Carbonates2").value);
+    formData.append("Bicarbonates2", document.getElementById("Bicarbonates2").value);
+
+    formData.append("Hydroxide3", document.getElementById("Hydroxide3").value);
+    formData.append("Carbonates3", document.getElementById("Carbonates3").value);
+    formData.append("Bicarbonates3", document.getElementById("Bicarbonates3").value);
+
+
+    fetch("https://script.google.com/macros/s/AKfycbw0_GUCK4Wh7UQHGLiYcEXUUcKs_JoVskxCGE876RnsnDEaMGWE4Hn8CqerF032_tVP/exec", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        alert("Data submitted successfully!");
+        document.getElementById("studentForm").reset();
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+
+</script>
+           </form>
+         </div>
+    </body>
+</html>
